@@ -1,10 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const button = document.querySelector(".fade-btn");
-    button.addEventListener("click", () => {
+    const startButton = document.getElementById("start-btn");
+
+    startButton.addEventListener("click", () => {
+        const startDelay = Number(document.getElementById("start-delay").value);
+        const fadeDuration = Number(document.getElementById("fade-duration").value);
+
         chrome.tabs.query({active: true, currentWindow: true}, ([tab]) => {
             chrome.scripting.executeScript({
                 target: {tabId: tab.id},
-                func: () => {
+                args: [startDelay, fadeDuration],
+                func: (startDelay, fadeDuration) => {
                     const video = document.querySelector("video");
                     if (!video) return;
                     setTimeout(() => {
@@ -12,10 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         let step = 0;
                         const fade = setInterval(() => {
                             step++;
-                            video.volume = Math.max(0, initialVolume * (60 - step)/ 60);
-                            if (step >= 60) clearInterval(fade);
-                        }, 1000);
-                    }, 1000);
+                            video.volume = Math.max(0, initialVolume * ((fadeDuration * 10 - step)/ (fadeDuration * 10)));
+                            if (step >= fadeDuration * 10) clearInterval(fade);
+                        }, 100);
+                    }, startDelay * 1000);
                 }
             });
         });
