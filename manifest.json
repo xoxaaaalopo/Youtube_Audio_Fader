@@ -1,12 +1,14 @@
 {
-    "name": "Youtube Auto Fader",
+    "name": "Youtube Audio Fader",
     "version": "1.0",
     "manifest_version": 3,
     "permissions": ["scripting", "activeTab"],
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
-
+            "16": "img/icon.png",
+            "48": "img/icon.png",
+            "128": "img/icon.png"
         }
     }
 }
