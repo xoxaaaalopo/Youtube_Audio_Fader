@@ -3,9 +3,15 @@
     "version": "1.0",
     "manifest_version": 3,
     "content_scripts": [
-    {
-        "matches": ["*://www.youtube.com/*"],
-        "js": ["content.js"]
+        {
+            "matches": ["*://www.youtube.com/*"],
+            "js": ["content.js"]
+        }],
+    "permissioins": ["scripting", "acctiveTab"],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            
+        }
     }
-    ]
 }
